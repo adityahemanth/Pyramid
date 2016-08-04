@@ -1,9 +1,9 @@
-/// Pyramid
+# Pyramid
 
 An information retrieval engine that leverages LSA (Latent Semantic Analysis) and LLC (Library of Congress Classification) to categorize and retrieve documents
 
 
-// USAGE:
+## USAGE:
 
 1) SETUP:
 
