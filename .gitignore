@@ -1,1 +1,6 @@
-/training/datasets
+/training/datasets/*.mrc
+/hierarchy/corpus/*.json
+/resources/master_corpus.svmlight
+/resources/master_corpus.svmlight.index
+/resources/master_dict.dict
+/resources/master_index.index

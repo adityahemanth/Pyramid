@@ -1,19 +1,23 @@
 class search:
 
 	def contains( self, node1, node2):
-		# return false if either of the 
-		# nodes is none
+
 		node1 = self.filter(node1)
 		node2 = self.filter(node2)
+
+		# return false if either of the 
+		# nodes is none
+
+		if not node1 or not node2:
+			return False
+
 
 		if node1 == node2:
 			return True
 
+		# if root return true
 		if node1[0] == '1':
 			return True
-
-		if not node1 or not node2:
-			return False
 
 		if node1[0] != node2[0]:
 			if len(node1) == 1 and len(node2) == 1:
@@ -125,6 +129,26 @@ class search:
 						print node
 
 		return node
+
+
+
+	def validate(self, node):
+
+		if not node:
+			return False
+
+		if node[0].isdigit():
+			return False
+
+
+		for letter in node:
+			if letter.isdigit():
+				return True
+
+		return False
+
+
+
 
 
 

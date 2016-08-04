@@ -1,6 +1,22 @@
+'''
+DESC.  : An object that contains data of individual nodes that make-up
+	     the hierarchy
+
+FUNC   : Stores node data. 
+
+USAGE  : Not to be used independently
+
+AUTHOR : Hemanth Aditya
+'''
+
+
 import collections
 import json
+import os, sys
 import utils
+
+SAVE_PATH = 'corpus/'
+
 
 class node(object):
 
@@ -9,7 +25,7 @@ class node(object):
 		self.parent = parent
 		self.children = children
 		self.desc = desc
-		self.document = []
+		self.document = set()
 
 
 	def addChild(self, child):
@@ -25,15 +41,31 @@ class node(object):
 		return False
 
 
+	def _isRoot(self):
+		if self.LCCN == '1':
+			return True
+		return False
+
+	def _isTopLevel(self):
+		if len(self.LCCN) == 1:
+			return True
+		return False
+
+
 	def addWord(self, word):
-		self.document.append(word)
+		self.document.add(word)
 
 
 	def save(self):
 
-		if self._isLeaf:
-			with open( self.LCCN + '.json', 'wb' ) as save:
-				json.dump(self.document, save, indent = 4)
+		save_string = ''
+		for word in self.document:
+			save_string += word + ' '
+
+		if save_string:
+			if not self._isTopLevel():
+				with open( os.path.join( 'hierarchy/corpus/', self.LCCN + '.json'), 'wb' )  as save:
+					json.dump(save_string, save, indent = 4)
 
 
 	# getters and setters

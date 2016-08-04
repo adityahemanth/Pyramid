@@ -1,3 +1,15 @@
+'''
+DESC.  : The core data-structure that makes up the heirarchy of
+		 the tree. It takes in an file (JSON) of the tree-structure 
+		 and reproduces it with node objects. 
+
+USAGE  : python tree.py
+
+
+AUTHOR : Hemanth Aditya
+'''
+
+
 from node import node
 import json
 from utils.search import search
@@ -51,6 +63,22 @@ class tree:
 						return ret_node
 
 			return curr_node
+
+
+	def save(self):
+		self._recursive_save(self.root)
+
+
+	def _recursive_save(self, node):
+
+		if not node:
+			return
+
+		if node.children != None:
+			for child in node.children:
+				self._recursive_save(child)
+
+		node.save()
 
 
 	

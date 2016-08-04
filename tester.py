@@ -1,3 +1,3 @@
-from tests import test
+from tests import acsii_test
 
-test.runtest()
+acsii_test.check()
