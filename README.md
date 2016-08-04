@@ -12,6 +12,10 @@ An information retrieval engine that leverages LSA (Latent Semantic Analysis) an
 
 
 	1.2 run main.py file with -e, -i flags to extract keywords from the training dataset and build indeices for LSI.
+	
+	```python
+	python main.py -e -i
+	```
 
 
 2) RUNNING:
@@ -23,4 +27,14 @@ An information retrieval engine that leverages LSA (Latent Semantic Analysis) an
 
 
 	2.3 Use the node objects methods (getLCCN(), getParent(), getDesc() .. etc ) to retrieve necessary information.
+	
+	
+	```python
+	from training import similarity
+	# make a search object
+	obj_search = search()
+	node = obj_search('Computer programming')
+	print 'LCC number: ', node.getLCCN()
+	print 'Description : ', node.getDesc()
+	```
 
