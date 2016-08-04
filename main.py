@@ -9,7 +9,6 @@ DESC  : dRun this main class with the following arguments:
         ii) '-i' : To use the document corpus to build document
                    indices and dictionary for 'LSI'
 
-        iii) '-t' : To train a new if-tdif model
 
 '''
 
@@ -53,6 +52,16 @@ def main():
 		digest()
 		print 'Indexing complete'
 
+	search_obj = search()
+
+	terms = raw_input('enter search terms : ')
+	while terms: 
+
+		node = search_obj.search(terms)
+
+		print 'LCCN : ', node.getLCCN()
+		print 'Description : ', node.getDesc()
+		terms = raw_input('\nenter search terms : ')
 
 
 if __name__ == "__main__":

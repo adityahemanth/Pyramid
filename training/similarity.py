@@ -12,9 +12,13 @@ class search:
 
 	def __init__(self, corpus_path = CORPUS_PATH, dict_path = DICT_PATH):
 
+		print 'loading dictionary'
 		self.dictionary = corpora.Dictionary.load(dict_path)
+
+		print 'loading corpus'
 		corpus = corpora.SvmLightCorpus(corpus_path)
 
+		print 'loading Tfidf model'
 		tfidf = models.TfidfModel(corpus)
 		corpus_tfidf = tfidf[corpus]
 
