@@ -2,9 +2,11 @@ from hierarchy import *
 from utils import *
 import os, sys
 from pymarc import *
+import json
 
 DATASET_PATH = 'training/datasets'
 TREE_PATH = 'resources/lcc.json'
+STATS_PATH = 'stats/'
 
 
 class extractor:
@@ -12,6 +14,7 @@ class extractor:
 	def __init__(self):
 		self.tree = tree(TREE_PATH)
 		self.dataset_path = DATASET_PATH
+		self.record_count = 0
 
 
 	def extract(self):
@@ -27,6 +30,13 @@ class extractor:
 				self._process(reader)
 			c += 1
 			print 'extraction completed ... ', c * 100 / x , '%'
+
+			marc_list = self.tree.save_stats()
+			with open(os.path.join(STATS_PATH, 'stats.json'), 'wb') as stat_file:
+				json.dump(marc_list, stat_file, indent=4)
+
+			print self.record_count
+
 
 
 
@@ -62,10 +72,17 @@ class extractor:
 
 		if not node._isTopLevel():
 			if record.title():
+
+				# gathering usage statistics
+				self.record_count += 0
+
 				title = record.title().split()
 				for word in title:
 					if c_obj._validate_word(word):
-						node.addWord(c_obj._clean_word(word))
+						word = c_obj._clean_word(word)
+						node.addWord(word.lower())
+
+				node.incrementMARCcount()
 
 
 

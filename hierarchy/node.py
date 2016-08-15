@@ -25,7 +25,8 @@ class node(object):
 		self.parent = parent
 		self.children = children
 		self.desc = desc
-		self.document = set()
+		self.marc_count = 0
+		self.document = ''
 
 
 	def addChild(self, child):
@@ -52,20 +53,26 @@ class node(object):
 		return False
 
 
+	def incrementMARCcount(self):
+		self.marc_count += 1
+
+
+	def getMARCcount(self):
+		return (self.LCCN, self.marc_count)
+
+
 	def addWord(self, word):
-		self.document.add(word)
+		self.document += word + '\n'
 
 
 	def save(self):
 
-		save_string = ''
-		for word in self.document:
-			save_string += word + ' '
+		save_string = self.document
 
 		if save_string:
 			if not self._isTopLevel():
 				with open( os.path.join( 'hierarchy/corpus/', self.LCCN + '.json'), 'wb' )  as save:
-					json.dump(save_string, save, indent = 4)
+					save.write(save_string)
 
 
 	# getters and setters

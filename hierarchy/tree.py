@@ -9,14 +9,15 @@ USAGE  : python tree.py
 AUTHOR : Hemanth Aditya
 '''
 
-
 from node import node
 import json
 from utils.search import search
 
+TREE_PATH = 'resources/lcc.json'
+
 class tree:
 
-	def __init__(self, file):
+	def __init__(self, file = TREE_PATH):
 		with open(file, 'rb') as open_file:
 			self.tree_list = json.load(open_file)
 
@@ -68,7 +69,23 @@ class tree:
 	def save(self):
 		self._recursive_save(self.root)
 
+	def save_stats(self):
+		return self._rec_stat_save(self.root)
 
+	def _rec_stat_save(self, node):
+
+		marc_list = []
+		if node != self.root:
+			marc_list.append(node.getMARCcount())
+
+		children = node.getChildren()
+		if children:
+			for child in children:
+				marc_list += self._rec_stat_save(child)
+
+		return marc_list
+
+	
 	def _recursive_save(self, node):
 
 		if not node:

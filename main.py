@@ -10,10 +10,15 @@ DESC  : dRun this main class with the following arguments:
                    indices and dictionary for 'LSI'
 
 
+        iii) '-s' : To get statistics on the processed MARC records
+        			and the word frequency counts 
+
+
 '''
 
 import sys, os
 from training import *
+from hierarchy import *
 
 DATASET_PATH = 'training/datasets'
 CORPUS_PATH = 'hierarchy/corpus'
@@ -38,6 +43,10 @@ def digest():
 	obj_dig.digest()
 
 
+def process():
+	processor_obj = processor()
+	processor_obj.process()
+
 
 
 def main():
@@ -46,11 +55,18 @@ def main():
 
 	if '-e' in arg_list:
 		extract()
-		print 'Extraction complete'
+		print 'Extraction complete\n'
 
 	if '-i' in arg_list:
 		digest()
-		print 'Indexing complete'
+		print 'Indexing complete\n'
+
+	if '-s' in arg_list:
+		print 'Compiling statistics\n'
+		process()
+
+
+
 
 	search_obj = search()
 

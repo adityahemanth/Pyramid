@@ -22,17 +22,12 @@ class search:
 		tfidf = models.TfidfModel(corpus)
 		corpus_tfidf = tfidf[corpus]
 
-		self.lsi = models.LsiModel(corpus_tfidf, id2word=self.dictionary, num_topics=2)
+		self.lsi = models.LsiModel(corpus_tfidf, id2word=self.dictionary, num_topics=256)
 		self.tree = tree(TREE_PATH)
 
-
-		try :
-			self.index = similarities.MatrixSimilarity.load(INDEX_PATH)
-
-		except:
-			self.index = similarities.MatrixSimilarity(self.lsi[self.corpus])
-			self.index.save(INDEX_PATH)
-			print self.index
+		self.index = similarities.MatrixSimilarity(self.lsi[corpus])
+		self.index.save(INDEX_PATH)
+		print self.index
 
 
 	def search(self, query):

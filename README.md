@@ -38,3 +38,12 @@ FOLDER : 'Pyramid/training/datasets'
 	print 'Description : ', node.getDesc()
 ```
 
+
+### 3) STATISTICS:
+
+3.1 To view statistics like node word-frequency count, MARC record contribution and to traverse the tree run :
+
+```python
+	python statistics.py
+```
+

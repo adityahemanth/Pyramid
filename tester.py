@@ -1,3 +1,3 @@
-from tests import acsii_test
+from tests import *
 
-acsii_test.check()
+stat_test.test()
